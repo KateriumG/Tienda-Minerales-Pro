@@ -3,36 +3,39 @@ import { Footer } from "./components/footer.js";
 
 import { navigate, renderRoute } from "./router.js";
 
-import { addToCart, removeFromCart } from "./data/cart.js";
+import { subscribe, addToCart, removeFromCart } from "./store.js";
 import { products } from "./data/products.js";
 
-// acciones globales (temporal, luego las mejoramos)
+// 👉 acciones globales (temporal)
 window.add = function(name) {
   const product = products.find(p => p.name === name);
   addToCart(product);
-  alert("Producto añadido 🛒");
 };
 
 window.remove = function(name) {
   removeFromCart(name);
-
-  // 🔥 clave: re-renderizar la ruta actual
-  renderRoute(location.pathname);
 };
 
-// render base (layout)
+// 👉 layout base
 const app = document.getElementById("app");
 
-app.innerHTML = `
-  ${Navbar()}
-  <main id="content"></main>
-  ${Footer()}
-`;
+function renderApp() {
+  app.innerHTML = `
+    ${Navbar()}
+    <main id="content"></main>
+    ${Footer()}
+  `;
 
-// cargar la ruta actual
-renderRoute(location.pathname);
+  renderRoute(location.pathname);
+}
 
-//navegación SPA
+// 🔥 se ejecuta cuando cambia el estado
+subscribe(renderApp);
+
+// render inicial
+renderApp();
+
+// navegación SPA
 document.addEventListener("click", (e) => {
   if (e.target.matches("[data-link]")) {
     e.preventDefault();

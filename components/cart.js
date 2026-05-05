@@ -1,14 +1,14 @@
-import { getCart, removeFromCart } from "../data/cart.js";
+import { getState } from "../store.js";
 
 export function Cart() {
-  const cart = getCart();
+  const { cart } = getState();
 
   return `
     <section class="cart">
-      <h2>Carrito</h2>
+      <h2>Carrito 🛒</h2>
 
       ${cart.length === 0 
-        ? "<p>Tu carrito está vacío</p>" 
+        ? "<p>Vacío</p>" 
         : cart.map(item => `
           <div class="cart-item">
             <h4>${item.name}</h4>
