@@ -14,7 +14,13 @@ export function Cart() {
             <h4>${item.name}</h4>
             <p>Cantidad: ${item.qty}</p>
             <p>$${item.price * item.qty}</p>
-            <button onclick="remove('${item.name}')">Eliminar</button>
+
+            <button data-remove="${item.name}">
+              Eliminar
+            </button>
+            <a href="/checkout" data-link class="checkout-btn">
+              Ir a pagar 💳
+            </a>
           </div>
         `).join("")
       }

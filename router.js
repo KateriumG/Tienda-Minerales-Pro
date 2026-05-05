@@ -1,9 +1,11 @@
 import { Home } from "./pages/home.js";
 import { CartPage } from "./pages/cartPage.js";
+import { Checkout } from "./pages/checkout.js";
 
 const routes = {
   "/": Home,
-  "/cart": CartPage
+  "/cart": CartPage,
+  "/checkout": Checkout
 };
 
 export function navigate(path) {
