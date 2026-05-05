@@ -1,11 +1,13 @@
 import { Home } from "./pages/home.js";
 import { CartPage } from "./pages/cartPage.js";
 import { Checkout } from "./pages/checkout.js";
+import { Login } from "./pages/login.js";
 
 const routes = {
   "/": Home,
   "/cart": CartPage,
-  "/checkout": Checkout
+  "/checkout": Checkout,
+  "/login": Login
 };
 
 export function navigate(path) {

@@ -1,5 +1,6 @@
 const state = {
-  cart: JSON.parse(localStorage.getItem("cart")) || []
+  cart: JSON.parse(localStorage.getItem("cart")) || [],
+  user: JSON.parse(localStorage.getItem("user")) || null
 };
 
 const listeners = [];
@@ -36,5 +37,16 @@ export function removeFromCart(name) {
 
 function save() {
   localStorage.setItem("cart", JSON.stringify(state.cart));
-  notify(); // magia: actualiza toda la app
+  localStorage.setItem("user", JSON.stringify(state.user));
+  notify(); // actualiza toda la app
+}
+
+export function login(userData) {
+  state.user = userData;
+  save();
+}
+
+export function logout() {
+  state.user = null;
+  save();
 }

@@ -1,11 +1,16 @@
 import { addToCart, removeFromCart } from "./store.js";
 import { products } from "./data/products.js";
+
 import { navigate } from "./router.js";
 import { getState } from "./store.js";
 
+import { login, logout } from "./store.js";
+
 export function initEvents() {
+  // Manages the click events
   document.addEventListener("click", (e) => {
 
+    // Product events
     if (e.target.matches("[data-add]")) {
       const name = e.target.dataset.add;
       const product = products.find(p => p.name === name);
@@ -16,11 +21,13 @@ export function initEvents() {
       removeFromCart(e.target.dataset.remove);
     }
 
+    // Manages changing site section
     if (e.target.matches("[data-link]")) {
       e.preventDefault();
       navigate(e.target.getAttribute("href"));
     }
 
+    // Checkout logic
     if (e.target.matches("[data-checkout]")) {
       const { cart } = getState();
 
@@ -33,5 +40,30 @@ export function initEvents() {
 
         // Aquí backend se procesaría el pago y se limpiaría el carrito
     }
+
+    if (e.target.matches("[data-logout]")) {
+      logout();
+      navigate("/");
+    }
+  });
+
+  // Manages the events that deal with forms
+  document.addEventListener("submit", (e)=> {
+
+    if (e.target.matches("#loginForm")) {
+      e.preventDefault();
+
+      const form = new FormData(e.target);
+
+      const user = {
+        name: form.get("name"),
+        email: form.get("email")
+      };
+
+      login(user);
+
+      navigate("/");
+    }
+
   });
 }
