@@ -1,10 +1,10 @@
-import { addToCart, removeFromCart } from "./store.js";
+import { addToCart, removeFromCart } from "../store.js";
 import { products } from "./data/products.js";
 
-import { navigate } from "./router.js";
-import { getState } from "./store.js";
+import { navigate } from "../router.js";
+import { getState } from "../store.js";
 
-import { login, logout } from "./store.js";
+import { login, logout } from "../store.js";
 
 export function initEvents() {
   // Manages the click events
@@ -48,7 +48,7 @@ export function initEvents() {
   });
 
   // Manages the events that deal with forms
-  document.addEventListener("submit", (e)=> {
+  document.addEventListener("submit", async (e)=> {
 
     if (e.target.matches("#loginForm")) {
       e.preventDefault();
@@ -59,6 +59,30 @@ export function initEvents() {
         name: form.get("name"),
         email: form.get("email")
       };
+
+      const res = await fetch("http://localhost:3000/api/auth/login",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+
+      if (res.ok){
+        // Guarda Token
+        localStorage.setItem("token", result.token);
+
+        // Guardar usuario decodificado (simple)
+        const payload = JSON.parse(atob(result.token.split(".")[1]));
+
+        login(payload);
+
+        navigate("/");
+      }else{
+        alert(result.message);
+      }
 
       login(user);
 

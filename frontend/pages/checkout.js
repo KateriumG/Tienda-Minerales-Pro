@@ -1,4 +1,4 @@
-import { getState } from "../store.js";
+import { getState } from "../../store.js";
 
 export function Checkout() {
   const { cart } = getState();
