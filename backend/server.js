@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 import cors from "cors";
 
-import authRoutes from "./../";
+import authRoutes from "./routes/auth.js";
 
 const app = express();
 
