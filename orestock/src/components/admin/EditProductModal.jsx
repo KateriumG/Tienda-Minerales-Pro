@@ -1,4 +1,4 @@
-function EditProductModal({ form, setForm, editing, onSave, onClose }) {
+function EditProductModal({ form, setForm, types, editing, onSave, onClose }) {
 
   const typesByCategory = {
     mineral: ["oro", "platino", "cobre"],
@@ -9,7 +9,7 @@ function EditProductModal({ form, setForm, editing, onSave, onClose }) {
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
 
-      <div className="bg-white p-6 rounded-xl w-[105px] space-y-4">
+      <div className="bg-white p-6 rounded-xl w-[450px] space-y-4">
 
         <h3 className="text-xl font-bold">
           {editing ? "Editar producto" : "Nuevo producto"}
@@ -44,19 +44,18 @@ function EditProductModal({ form, setForm, editing, onSave, onClose }) {
         <div>
           <label className="text-sm text-gray-600">Categoría</label>
           <select
-            className="w-full p-2 border rounded"
-            value={form.category}
+            value={form.category_id}
             onChange={(e) =>
               setForm({
                 ...form,
-                category: e.target.value,
-                type: "" // reset type al cambiar categoría
+                category_id: Number(e.target.value),
+                type_id: "" // reset
               })
             }
           >
-            <option value="mineral">Mineral</option>
-            <option value="cristal">Cristal</option>
-            <option value="gema">Gema</option>
+            <option value={1}>Mineral</option>
+            <option value={2}>Cristal</option>
+            <option value={3}>Gema</option>
           </select>
         </div>
 
@@ -71,11 +70,13 @@ function EditProductModal({ form, setForm, editing, onSave, onClose }) {
           >
             <option value="">Selecciona tipo</option>
 
-            {types.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.name}
-              </option>
-            ))}
+              {types
+                .filter((t) => t.category_id === form.category_id)
+                .map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.name}
+                  </option>
+              ))}
           </select>
         </div>
 

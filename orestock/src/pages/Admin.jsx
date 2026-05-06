@@ -90,6 +90,7 @@ const save = async () => {
           form={form}
           setForm={setForm}
           editing={editing}
+          types={types}
           onSave={save}
           onClose={() => {
             setEditing(null)
