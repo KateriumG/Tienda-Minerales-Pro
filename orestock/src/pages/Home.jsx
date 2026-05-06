@@ -1,7 +1,5 @@
-import Header from "../components/Header"
 import Welcome from "../components/Welcome"
 import ProductCard from "../components/ProductCard"
-import Footer from "../components/Footer"
 
 function Home() {
 
@@ -25,7 +23,6 @@ function Home() {
 
   return (
     <>
-      <Header />
       <Welcome />
 
       {/* Productos */}
@@ -34,8 +31,6 @@ function Home() {
           <ProductCard key={i} {...p} />
         ))}
       </section>
-
-      <Footer />
     </>
   )
 }
