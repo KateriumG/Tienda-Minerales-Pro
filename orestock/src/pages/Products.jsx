@@ -14,7 +14,9 @@ function Products() {
   useEffect(() => {
       fetch("http://localhost:3001/products")
         .then(res => res.json())
-        .then(data => setProducts(data))
+        .then(data => {
+          setProducts(data)
+        })
   }, [])
 
   const [category, setCategory] = useState("all")

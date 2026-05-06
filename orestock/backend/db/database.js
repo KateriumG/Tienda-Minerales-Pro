@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose()
 
-const db = new sqlite3.Database("./orestock.db")
+const db = new sqlite3.Database("./../orestock.db")
 
 // 🧱 CATEGORIES
 db.run(`

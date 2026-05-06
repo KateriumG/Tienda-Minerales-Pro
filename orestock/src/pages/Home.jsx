@@ -28,9 +28,13 @@ function Home() {
 
       {/* Productos */}
       <section className="px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {visibleProducts.map((p, i) => (
-          <ProductCard key={i} {...p} />
-        ))}
+        {visibleProducts.length > 0 ? (
+          visibleProducts.map((p, i) => (
+            <ProductCard key={i} {...p} />
+          ))
+        ) : (
+          <p>No hay productos disponibles.</p>
+        )}
       </section>
     </>
   )

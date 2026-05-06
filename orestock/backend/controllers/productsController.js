@@ -4,8 +4,8 @@ exports.getAll = (req, res) => {
   db.all(`
     SELECT products.*, types.name AS type_name, categories.name AS category_name
     FROM products
-    JOIN types ON products.type_id = types.id
-    JOIN categories ON types.category_id = categories.id
+    LEFT JOIN types ON products.type_id = types.id
+    LEFT JOIN categories ON types.category_id = categories.id
   `, [], (err, rows) => {
     if (err) return res.status(500).json(err)
     res.json(rows)
@@ -14,6 +14,8 @@ exports.getAll = (req, res) => {
 
 exports.create = (req, res) => {
   const { name, price, image, type_id } = req.body
+
+  console.log("CREANDO PRODUCTO:", req.body)
 
   db.run(
     `INSERT INTO products (name, price, image, type_id)

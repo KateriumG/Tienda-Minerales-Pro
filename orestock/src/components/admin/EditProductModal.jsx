@@ -9,7 +9,7 @@ function EditProductModal({ form, setForm, editing, onSave, onClose }) {
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
 
-      <div className="bg-white p-6 rounded-xl w-[420px] space-y-4">
+      <div className="bg-white p-6 rounded-xl w-[105px] space-y-4">
 
         <h3 className="text-xl font-bold">
           {editing ? "Editar producto" : "Nuevo producto"}
@@ -64,17 +64,16 @@ function EditProductModal({ form, setForm, editing, onSave, onClose }) {
         <div>
           <label className="text-sm text-gray-600">Tipo</label>
           <select
-            className="w-full p-2 border rounded"
-            value={form.type}
+            value={form.type_id}
             onChange={(e) =>
-              setForm({ ...form, type: e.target.value })
+              setForm({ ...form, type_id: Number(e.target.value) })
             }
           >
-            <option value="">Seleccionar tipo</option>
+            <option value="">Selecciona tipo</option>
 
-            {(typesByCategory[form.category] || []).map((t) => (
-              <option key={t} value={t}>
-                {t}
+            {types.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.name}
               </option>
             ))}
           </select>

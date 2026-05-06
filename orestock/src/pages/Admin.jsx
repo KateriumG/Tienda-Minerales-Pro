@@ -5,6 +5,7 @@ import EditProductModal from "../components/admin/EditProductModal"
 function Admin() {
 
   const [products, setProducts] = useState([])
+  const [types, setTypes] = useState([])
   const [editing, setEditing] = useState(null)
   const [isCreating, setIsCreating] = useState(false)
   const [form, setForm] = useState({})
@@ -18,6 +19,12 @@ function Admin() {
     load()
   }, [])
 
+  useEffect(() => {
+  fetch("http://localhost:3001/types")
+    .then(res => res.json())
+    .then(setTypes)
+}, [])
+
   const deleteProduct = async (id) => {
     await fetch(`http://localhost:3001/products/${id}`, {
       method: "DELETE"
@@ -29,11 +36,9 @@ const save = async () => {
 
   const url = editing
     ? `http://localhost:3001/products/${editing.id}`
-    : "http://localhost:3001/products"
+    : "http://localhost:3001/products/"
 
   const method = editing ? "PUT" : "POST"
-
-  console.log("FORM ENVIADO:", form)
 
   await fetch(url, {
     method,
@@ -62,7 +67,7 @@ const save = async () => {
             name: "",
             price: "",
             category: "mineral",
-            type: "",
+            type_id: "",
             image: ""
           })
         }}
