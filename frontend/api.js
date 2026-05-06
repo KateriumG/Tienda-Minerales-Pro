@@ -43,3 +43,8 @@ export async function registerRequest(data) {
 
   return parseResponse(res);
 }
+
+export async function getProducts() {
+  const res = await fetch("http://localhost:3000/api/products");
+  return res.json();
+}

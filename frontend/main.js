@@ -4,7 +4,19 @@ import { Footer } from "./components/footer.js";
 import { renderRoute } from "./router.js";
 import { subscribe } from "./store.js";
 
+import { getProducts } from "./api.js";
+import { setProducts } from "./store.js";
+
 import { initEvents } from "./events.js";
+
+import { setUserFromToken } from "./store.js";
+
+// Verificar si hay un token en localStorage al cargar la aplicación
+const token = localStorage.getItem("token");
+
+if (token) {
+  setUserFromToken(token);
+}
 
 // 👉 layout base
 const app = document.getElementById("app");
@@ -18,6 +30,13 @@ function renderApp() {
 
   renderRoute(location.pathname);
 }
+
+async function init() {
+  const products = await getProducts();
+  setProducts(products);
+}
+
+init();
 
 // 🔥 reactividad
 subscribe(renderApp);

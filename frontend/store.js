@@ -1,6 +1,7 @@
 const state = {
   cart: JSON.parse(localStorage.getItem("cart")) || [],
-  user: JSON.parse(localStorage.getItem("user")) || null
+  user: JSON.parse(localStorage.getItem("user")) || nulll,
+  products: []
 };
 
 const listeners = [];
@@ -17,7 +18,7 @@ function notify() {
   listeners.forEach(fn => fn());
 }
 
-// 🛒 acciones
+// acciones del carrito
 export function addToCart(product) {
   const existing = state.cart.find(p => p.name === product.name);
 
@@ -41,6 +42,7 @@ function save() {
   notify(); // actualiza toda la app
 }
 
+// auth actions
 export function login(userData) {
   state.user = userData;
   save();
@@ -48,5 +50,20 @@ export function login(userData) {
 
 export function logout() {
   state.user = null;
+  localStorage.removeItem("token");
   save();
+}
+// Función para decodificar el token y establecer el usuarioen el estado
+export function setUserFromToken(token) {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    state.user = payload;
+  } catch {
+    state.user = null;
+  }
+}
+
+export function setProducts(products) {
+  state.products = products;
+  notify();
 }
