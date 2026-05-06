@@ -78,8 +78,8 @@ export function initEvents() {
       const form = new FormData(e.target);
 
       const user = {
-        name: form.get("name"),
-        email: form.get("email")
+        email: form.get("email"),
+        password: form.get("password")
       };
 
       const result = await loginRequest(user);
@@ -94,13 +94,9 @@ export function initEvents() {
         login(payload);
 
         navigate("/");
-      }else{
+      } else {
         alert(result.message);
       }
-
-      login(user);
-
-      navigate("/");
     }
 
   });
