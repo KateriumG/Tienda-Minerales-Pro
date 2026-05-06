@@ -16,6 +16,7 @@ function Header() {
       <nav className="flex gap-6 text-gray-700 font-medium">
         <Link to="/" className="hover:text-purple-600">Inicio</Link>
         <Link to="/products" className="hover:text-purple-600">Productos</Link>
+        <Link to="/admin" className="hover:text-purple-600">Admin</Link>
       </nav>
 
       <Link 

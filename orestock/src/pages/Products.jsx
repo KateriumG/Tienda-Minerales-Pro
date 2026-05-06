@@ -19,7 +19,7 @@ function Products() {
 
   const [category, setCategory] = useState("all")
   const [type, setType] = useState("all")
-  const [maxPrice, setMaxPrice] = useState(200000)
+  const [maxPrice, setMaxPrice] = useState(2000000)
 
   const filteredProducts = products.filter((p) => {
     return (
@@ -95,7 +95,7 @@ function Products() {
             <input
               type="range"
               min="0"
-              max="200000"
+              max="2000000"
               step="10000"
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
