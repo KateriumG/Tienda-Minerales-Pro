@@ -1,11 +1,24 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 const CartContext = createContext()
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([])
 
-  // ✅ Agregar producto
+  // Cargar desde localStorage
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart")
+    return savedCart ? JSON.parse(savedCart) : []
+  })
+
+  // Guardar en localStorage cada vez que cambie
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart))
+  }, [cart])
+
+  // Limpiar carrito
+  const clearCart = () => setCart([])
+
+  // Agregar producto
   const addToCart = (product) => {
     setCart((prev) => {
       const existing = prev.find(p => p.name === product.name)
@@ -22,12 +35,12 @@ export function CartProvider({ children }) {
     })
   }
 
-  // ❌ Eliminar producto
+  // Eliminar producto
   const removeFromCart = (name) => {
     setCart(prev => prev.filter(p => p.name !== name))
   }
 
-  // ➕➖ Cambiar cantidad
+  // Cambiar cantidad
   const updateQuantity = (name, amount) => {
     setCart(prev =>
       prev
@@ -40,7 +53,7 @@ export function CartProvider({ children }) {
     )
   }
 
-  // 💰 Total
+  // Total
   const total = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -53,7 +66,8 @@ export function CartProvider({ children }) {
         addToCart,
         removeFromCart,
         updateQuantity,
-        total
+        total,
+        clearCart
       }}
     >
       {children}
@@ -61,7 +75,6 @@ export function CartProvider({ children }) {
   )
 }
 
-// Hook personalizado
 export function useCart() {
   return useContext(CartContext)
 }

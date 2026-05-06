@@ -3,10 +3,10 @@ import ProductCard from "../components/ProductCard"
 function Products() {
 
   const products = [
-    { name: "Amatista", price: "40000", image: "https://placehold.org/300x200" },
-    { name: "Cuarzo Rosa", price: "35000", image: "https://placehold.org/300x200" },
-    { name: "Obsidiana", price: "50000", image: "https://placehold.org/300x200" },
-    { name: "Turmalina", price: "60000", image: "https://placehold.org/300x200" }
+    { id: 1 ,name: "Amatista", price: 4000, image: "https://placehold.org/300x200" },
+    { id: 2, name: "Cuarzo Rosa", price: 35000, image: "https://placehold.org/300x200" },
+    { id: 3, name: "Obsidiana", price: 50000, image: "https://placehold.org/300x200" },
+    { id: 4, name: "Turmalina", price: 60000, image: "https://placehold.org/300x200" }
   ]
 
   return (
