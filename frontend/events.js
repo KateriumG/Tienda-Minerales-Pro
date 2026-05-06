@@ -51,6 +51,27 @@ export function initEvents() {
   // Manages the events that deal with forms
   document.addEventListener("submit", async (e)=> {
 
+    if (e.target.matches("#registerForm")) {
+      e.preventDefault();
+
+      const form = new FormData(e.target);
+
+      const data = {
+        name: form.get("name"),
+        email: form.get("email"),
+        password: form.get("password")
+      };
+
+      const result = await registerRequest(data);
+
+      if (result.message) {
+        alert("Usuario creado ✅");
+        navigate("/login");
+      } else {
+        alert(result.message || "Error");
+      }
+    }
+
     if (e.target.matches("#loginForm")) {
       e.preventDefault();
 

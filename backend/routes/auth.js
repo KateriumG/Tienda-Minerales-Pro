@@ -2,6 +2,13 @@ import express from "express";
 import fs from "fs";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const filePath = path.join(__dirname, "../data/users.json");
 
 const router = express.Router();
 
@@ -9,13 +16,21 @@ const SECRET = "orestock_secret"; // luego usar .env
 
 // leer usuarios
 function getUsers() {
-  const data = fs.readFileSync("./data/users.json");
-  return JSON.parse(data);
+  try {
+    const data = fs.readFileSync(filePath, "utf-8");
+
+    if (!data) return [];
+
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("Error leyendo usuarios:", err);
+    return [];
+  }
 }
 
 // guardar usuarios
 function saveUsers(users) {
-  fs.writeFileSync("./data/users.json", JSON.stringify(users, null, 2));
+  fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
 }
 
 // REGISTER
@@ -44,9 +59,15 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({ message: `Email y contraseña requeridos ${filePath}` });
+  }
+
   const users = getUsers();
 
-  const user = users.find(u => u.email === email);
+  const user = users.find(
+    u => u.email.toLowerCase() === email.toLowerCase()
+  );
 
   if (!user) {
     return res.status(400).json({ message: "Usuario no encontrado" });

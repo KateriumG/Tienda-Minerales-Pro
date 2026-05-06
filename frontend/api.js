@@ -1,6 +1,24 @@
 const API = "http://localhost:3000/api";
 
-// LOGIN
+// 🔧 helper reutilizable
+async function parseResponse(res) {
+  const text = await res.text();
+
+  try {
+    const data = JSON.parse(text);
+
+    if (!res.ok) {
+      throw new Error(data.message || "Error en la petición");
+    }
+
+    return data;
+  } catch (err) {
+    console.error("Respuesta no válida:", text);
+    throw new Error("Error en servidor");
+  }
+}
+
+// 🔐 LOGIN
 export async function loginRequest(data) {
   const res = await fetch(`${API}/auth/login`, {
     method: "POST",
@@ -10,10 +28,10 @@ export async function loginRequest(data) {
     body: JSON.stringify(data)
   });
 
-  return res.json();
+  return parseResponse(res);
 }
 
-// REGISTER
+// 📝 REGISTER
 export async function registerRequest(data) {
   const res = await fetch(`${API}/auth/register`, {
     method: "POST",
@@ -23,5 +41,5 @@ export async function registerRequest(data) {
     body: JSON.stringify(data)
   });
 
-  return res.json();
+  return parseResponse(res);
 }

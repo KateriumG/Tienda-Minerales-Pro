@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": 1778033793129,
+    "name": "Kevin Escobar",
+    "email": "kevinjoelescobar2020@gmail.com",
+    "password": "$2b$10$U18Aztt7bvTcieNmK8sMHuperhzrsiryihPhyAoMtwulrDm3HQoCq"
+  },
+  {
+    "id": 1778035082792,
+    "name": "Test",
+    "email": "test@test.com",
+    "password": "$2b$10$7EfSQOR29Rv4.760xm.Q/OBC5l1N4gh8LLhRYyXdNU.8y/Jz8mM6W"
+  }
+]

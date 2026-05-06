@@ -11,7 +11,6 @@ export function Navbar() {
       <ul>
         <li><a href="/" data-link>Inicio</a></li>
         <li><a href="/cart" data-link>Carrito (${totalItems})</a></li>
-        <li>Contacto</li>
         ${
           user
           ?`
@@ -20,6 +19,7 @@ export function Navbar() {
           `
           :`
             <li><a href="/login" data-link>Login</a></li>
+            <li><a href="/register" data-link>Registrarse</a></li>
           `
         }
       </ul>
