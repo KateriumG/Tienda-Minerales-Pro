@@ -5,6 +5,7 @@ import { navigate } from "../router.js";
 import { getState } from "../store.js";
 
 import { login, logout } from "../store.js";
+import { loginRequest, registerRequest } from "./api.js";
 
 export function initEvents() {
   // Manages the click events
@@ -60,17 +61,9 @@ export function initEvents() {
         email: form.get("email")
       };
 
-      const res = await fetch("http://localhost:3000/api/auth/login",{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
+      const result = await loginRequest(user);
 
-      const result = await res.json();
-
-      if (res.ok){
+      if (result.token) {
         // Guarda Token
         localStorage.setItem("token", result.token);
 
