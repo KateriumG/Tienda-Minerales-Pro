@@ -1,4 +1,8 @@
+import { useCart } from '../context/CartContext'
+
 function ProductCard({ name, price, image }) {
+  const { addToCart } = useCart()
+
   return (
     <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition">
       
@@ -16,7 +20,10 @@ function ProductCard({ name, price, image }) {
         ${price}
       </p>
 
-      <button className="mt-3 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">
+      <button 
+        onClick={() => addToCart({ name, price, image })}
+        className="mt-3 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition"
+      >
         Comprar
       </button>
 
