@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 import { useCart } from "../context/CartContext"
 
 function Cart() {
@@ -51,9 +53,16 @@ function Cart() {
       {/* Total */}
       <div className="mt-10 text-right">
         <h3 className="text-2xl font-bold">
-          Total: ${total}
+          Total: {total}
         </h3>
       </div>
+
+      <Link 
+        to="/checkout"
+        className="inline-block mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700"
+      >
+        Ir a pagar
+      </Link>
     </section>
   )
 }

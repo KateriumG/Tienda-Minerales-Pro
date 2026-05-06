@@ -59,6 +59,12 @@ export function CartProvider({ children }) {
     0
   )
 
+  const formatCOP = (value) =>
+  new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP"
+  }).format(value)
+
   return (
     <CartContext.Provider
       value={{
@@ -66,7 +72,7 @@ export function CartProvider({ children }) {
         addToCart,
         removeFromCart,
         updateQuantity,
-        total,
+        total: formatCOP(total),
         clearCart
       }}
     >
