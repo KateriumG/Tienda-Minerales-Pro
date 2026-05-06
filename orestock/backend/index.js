@@ -21,6 +21,27 @@ db.run(`
   )
 `)
 
+app.get("/products", (req, res) => {
+  db.all("SELECT * FROM products", [], (err, rows) => {
+    if (err) return res.status(500).json(err)
+    res.json(rows)
+  })
+})
+
+app.post("/products", (req, res) => {
+  const { name, price, category, type, image } = req.body
+
+  db.run(
+    `INSERT INTO products (name, price, category, type, image)
+     VALUES (?, ?, ?, ?, ?)`,
+    [name, price, category, type, image],
+    function (err) {
+      if (err) return res.status(500).json(err)
+      res.json({ id: this.lastID })
+    }
+  )
+})
+
 app.listen(3001, () => {
   console.log("🚀 Backend corriendo en http://localhost:3001")
 })

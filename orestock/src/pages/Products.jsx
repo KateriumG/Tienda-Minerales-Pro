@@ -1,14 +1,5 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import ProductCard from "../components/ProductCard"
-
-const products = [
-  { id: 1, name: "Oro", price: 120000, category: "mineral", type: "oro", image: "https://placehold.org/300x200" },
-  { id: 2, name: "Platino", price: 150000, category: "mineral", type: "platino", image: "https://placehold.org/300x200" },
-  { id: 3, name: "Cuarzo", price: 40000, category: "cristal", type: "cuarzo", image: "https://placehold.org/300x200" },
-  { id: 4, name: "Amatista", price: 50000, category: "cristal", type: "amatista", image: "https://placehold.org/300x200" },
-  { id: 5, name: "Perla", price: 80000, category: "gema", type: "perla", image: "https://placehold.org/300x200" },
-  { id: 6, name: "Turquesa", price: 60000, category: "gema", type: "turquesa", image: "https://placehold.org/300x200" }
-]
 
 const typesByCategory = {
   mineral: ["oro", "platino", "cobre"],
@@ -17,6 +8,14 @@ const typesByCategory = {
 }
 
 function Products() {
+
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+      fetch("http://localhost:3001/products")
+        .then(res => res.json())
+        .then(data => setProducts(data))
+  }, [])
 
   const [category, setCategory] = useState("all")
   const [type, setType] = useState("all")
