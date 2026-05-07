@@ -1,4 +1,4 @@
-function AdminTable({ products, onEdit, onDelete }) {
+function AdminProductsTable({ products, onEdit, onDelete }) {
   return (
     <div className="bg-white shadow rounded-xl overflow-hidden">
 
@@ -64,4 +64,4 @@ function AdminTable({ products, onEdit, onDelete }) {
   )
 }
 
-export default AdminTable
+export default AdminProductsTable

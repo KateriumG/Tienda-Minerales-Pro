@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import AdminTable from "../components/admin/AdminTable"
-import EditProductModal from "../components/admin/EditProductModal"
+import AdminProductsTable from "../components/admin/products/AdminProductsTable"
+import EditProductModal from "../components/admin/products/EditProductModal"
 
 function Admin() {
 
@@ -76,7 +76,7 @@ const save = async () => {
         + Nuevo producto
       </button>
 
-      <AdminTable
+      <AdminProductsTable
         products={products}
         onEdit={(p) => {
           setEditing(p)
