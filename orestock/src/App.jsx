@@ -6,10 +6,22 @@ import Footer from './components/Footer'
 
 import Home from './pages/Home'
 import Products from './pages/Products'
+import Register from './pages/Register'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Success from './pages/Success'
-import Admin from './pages/Admin'
+import Settings from './pages/Settings'
+import Orders from './pages/Orders'
+
+import AdminLayout from './layouts/AdminLayout'
+import AdminDashboard from "./pages/admin/AdminDashboard"
+import AdminProducts from "./pages/admin/AdminProducts"
+import AdminCategories from "./pages/admin/AdminCategories"
+import AdminTypes from "./pages/admin/AdminTypes"
+
+import ProtectedAdminRoute from './ProtectedAdminRoute'
+
+import Login from './pages/Login'
 
 import './styles/index.css'
 
@@ -25,7 +37,40 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/success" element={<Success />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedAdminRoute>
+              <AdminLayout />
+            </ProtectedAdminRoute>
+          }
+        >
+
+          <Route
+            path="dashboard"
+            element={<AdminDashboard />}
+          />
+
+          <Route
+            path="products"
+            element={<AdminProducts />}
+          />
+
+          <Route
+            path="categories"
+            element={<AdminCategories />}
+          />
+
+          <Route
+            path="types"
+            element={<AdminTypes />}
+          />
+
+        </Route>
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/orders"element={<Orders />}/>
       </Routes>
       <Footer />
     </div>

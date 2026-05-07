@@ -1,7 +1,34 @@
-const express = require('express');
-const router = express.Router();
-const controller = require('../controllers/typesController');
+const express = require("express")
+const router = express.Router()
 
-router.get('/', controller.getAll);
+const controller = require("../controllers/categoriesController")
 
-module.exports = router;
+const {
+  verifyToken,
+  isAdmin
+} = require("../middleware/auth")
+
+router.get("/", controller.getAll)
+
+router.post(
+  "/",
+  verifyToken,
+  isAdmin,
+  controller.create
+)
+
+router.put(
+  "/:id",
+  verifyToken,
+  isAdmin,
+  controller.update
+)
+
+router.delete(
+  "/:id",
+  verifyToken,
+  isAdmin,
+  controller.remove
+)
+
+module.exports = router
