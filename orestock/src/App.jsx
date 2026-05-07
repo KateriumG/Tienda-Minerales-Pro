@@ -10,7 +10,6 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Success from './pages/Success'
 
-import Admin from './pages/Admin'
 import AdminLayout from './layouts/AdminLayout'
 import AdminDashboard from "./pages/admin/AdminDashboard"
 import AdminProducts from "./pages/admin/AdminProducts"
