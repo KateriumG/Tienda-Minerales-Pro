@@ -76,3 +76,73 @@ exports.login = (req, res) => {
     }
   )
 }
+
+exports.updateSettings = async (req, res) => {
+
+  const userId = req.user.id
+
+  const {
+    username,
+    password
+  } = req.body
+
+  try {
+
+    // obtener usuario actual
+    db.get(
+      `
+      SELECT * FROM users
+      WHERE id = ?
+      `,
+      [userId],
+
+      async (err, user) => {
+
+        if (err) {
+          return res.status(500).json(err)
+        }
+
+        // mantener password vieja
+        let hashedPassword =
+          user.password
+
+        // si hay nueva password
+        if (password?.trim()) {
+
+          hashedPassword =
+            await bcrypt.hash(password, 10)
+        }
+
+        db.run(
+          `
+          UPDATE users
+          SET
+            username = ?,
+            password = ?
+          WHERE id = ?
+          `,
+          [
+            username,
+            hashedPassword,
+            userId
+          ],
+
+          (err) => {
+
+            if (err) {
+              return res.status(500).json(err)
+            }
+
+            res.json({
+              message: "Configuración actualizada"
+            })
+          }
+        )
+      }
+    )
+
+  } catch (err) {
+
+    res.status(500).json(err)
+  }
+}

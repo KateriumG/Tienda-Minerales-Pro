@@ -9,6 +9,7 @@ import Products from './pages/Products'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Success from './pages/Success'
+import Settings from './pages/Settings'
 
 import AdminLayout from './layouts/AdminLayout'
 import AdminDashboard from "./pages/admin/AdminDashboard"
@@ -64,6 +65,7 @@ function App() {
           />
 
         </Route>
+        <Route path="/settings" element={<Settings />} />
         <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />

@@ -20,6 +20,7 @@ function Header() {
         {localStorage.getItem("token") ? (
             <ProtectedAdminRoute>
               <Link to="/admin" className="hover:text-purple-600">Admin</Link>
+              <Link to="/settings" className="hover:text-purple-600">Configuración</Link>
             </ProtectedAdminRoute>
           ) : (
             <Link to="/login" className="hover:text-purple-600">Login</Link>
