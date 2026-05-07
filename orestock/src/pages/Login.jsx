@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 
 function Login() {
 
@@ -63,6 +64,26 @@ function Login() {
       >
         Entrar
       </button>
+      <p className="
+        text-center
+        text-sm
+        text-gray-500
+      ">
+
+        ¿No tienes cuenta?
+
+        <Link
+          to="/register"
+          className="
+            text-purple-600
+            ml-1
+            hover:underline
+          "
+        >
+          Regístrate
+        </Link>
+
+      </p>
 
     </div>
   )

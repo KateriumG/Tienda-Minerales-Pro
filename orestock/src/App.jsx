@@ -6,10 +6,12 @@ import Footer from './components/Footer'
 
 import Home from './pages/Home'
 import Products from './pages/Products'
+import Register from './pages/Register'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Success from './pages/Success'
 import Settings from './pages/Settings'
+import Orders from './pages/Orders'
 
 import AdminLayout from './layouts/AdminLayout'
 import AdminDashboard from "./pages/admin/AdminDashboard"
@@ -67,6 +69,8 @@ function App() {
         </Route>
         <Route path="/settings" element={<Settings />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/orders"element={<Orders />}/>
       </Routes>
       <Footer />
     </div>
