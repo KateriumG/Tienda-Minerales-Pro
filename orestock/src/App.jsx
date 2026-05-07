@@ -10,6 +10,8 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Success from './pages/Success'
 import Admin from './pages/Admin'
+import Login from './pages/Login'
+import ProtectedAdminRoute from './ProtectedAdminRoute'
 
 import './styles/index.css'
 
@@ -25,7 +27,12 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/success" element={<Success />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={
+          <ProtectedAdminRoute>
+            <Admin />
+          </ProtectedAdminRoute>
+        } />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </div>

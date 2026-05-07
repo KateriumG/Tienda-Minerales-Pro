@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useCart } from '../context/CartContext'
+import ProtectedAdminRoute from "../ProtectedAdminRoute"
 
 function Header() {
   const { cart } = useCart()
@@ -16,7 +17,13 @@ function Header() {
       <nav className="flex gap-6 text-gray-700 font-medium">
         <Link to="/" className="hover:text-purple-600">Inicio</Link>
         <Link to="/products" className="hover:text-purple-600">Productos</Link>
-        <Link to="/admin" className="hover:text-purple-600">Admin</Link>
+        {localStorage.getItem("token") ? (
+            <ProtectedAdminRoute>
+              <Link to="/admin" className="hover:text-purple-600">Admin</Link>
+            </ProtectedAdminRoute>
+          ) : (
+            <Link to="/login" className="hover:text-purple-600">Login</Link>
+        )}
       </nav>
 
       <Link 
