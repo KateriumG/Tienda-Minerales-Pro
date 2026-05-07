@@ -6,6 +6,8 @@ function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
+  const navigate = useNavigate()
+
   const login = async () => {
 
     const res = await fetch(
@@ -26,14 +28,35 @@ function Login() {
 
     if (data.token) {
 
-      localStorage.setItem("token", data.token)
-      localStorage.setItem("role", data.role)
+      localStorage.setItem(
+        "token",
+        data.token
+      )
 
-      window.location.href = "/admin"
+      localStorage.setItem(
+        "role",
+        data.role
+      )
+
+      localStorage.setItem(
+        "username",
+        data.username
+      )
+
+      if (data.role === "admin") {
+
+        navigate("/admin/dashboard")
+
+      } else {
+
+        navigate("/")
+      }
 
     } else {
+
       alert(data.error)
     }
+
   }
 
   return (

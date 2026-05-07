@@ -6,24 +6,37 @@ exports.create = (req, res) => {
 
   const {
     items,
-    total
+    total,
+    customer
   } = req.body
 
   db.run(
     `
     INSERT INTO orders
-    (user_id, total)
-    VALUES (?, ?)
+    (
+      user_id,
+      customer_name,
+      customer_email,
+      customer_address,
+      total
+    )
+    VALUES (?, ?, ?, ?, ?)
     `,
-    [userId, total],
+    [
+      userId,
+      customer.name,
+      customer.email,
+      customer.address,
+      total
+    ],
 
     function (err) {
 
-      if (err)
+      if (err) {
         return res.status(500).json(err)
+      }
 
-      const orderId =
-        this.lastID
+      const orderId = this.lastID
 
       items.forEach((item) => {
 

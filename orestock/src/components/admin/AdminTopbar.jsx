@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom"
+
 function AdminTopbar() {
+
+  const navigate = useNavigate()
 
   const username =
     localStorage.getItem("username")
@@ -19,7 +23,7 @@ function AdminTopbar() {
         <button
           onClick={() => {
             localStorage.clear()
-            window.location.href = "/login"
+            navigate("/login")
           }}
           className="bg-red-500 text-white px-3 py-1 rounded"
         >

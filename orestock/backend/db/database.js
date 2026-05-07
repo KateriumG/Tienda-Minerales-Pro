@@ -45,8 +45,15 @@ CREATE TABLE IF NOT EXISTS users (
 db.run(`
 CREATE TABLE IF NOT EXISTS orders (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+
   user_id INTEGER,
+
+  customer_name TEXT,
+  customer_email TEXT,
+  customer_address TEXT,
+
   total REAL,
+
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
   FOREIGN KEY(user_id)

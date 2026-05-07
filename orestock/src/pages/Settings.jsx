@@ -1,6 +1,10 @@
 import { useState } from "react"
 
+import { useNavigate } from "react-router-dom"
+
 function Settings() {
+
+    const navigate = useNavigate()
 
   const [username, setUsername] =
     useState(
@@ -124,18 +128,43 @@ function Settings() {
       </div>
 
       {/* BUTTON */}
-      <button
-        onClick={save}
-        className="
-          bg-purple-600
-          hover:bg-purple-700
-          text-white
-          px-6 py-3
-          rounded-lg
-        "
-      >
-        Guardar cambios
-      </button>
+      <div className="flex gap-3">
+
+        <button
+            onClick={save}
+            className="
+            flex-1
+            bg-purple-600
+            hover:bg-purple-700
+            text-white
+            px-6 py-3
+            rounded-lg
+            "
+        >
+            Guardar cambios
+        </button>
+
+        <button
+            onClick={() => {
+
+            localStorage.removeItem("token")
+            localStorage.removeItem("role")
+            localStorage.removeItem("username")
+
+            navigate("/login")
+            }}
+            className="
+            bg-red-500
+            hover:bg-red-600
+            text-white
+            px-6 py-3
+            rounded-lg
+            "
+        >
+            Logout
+        </button>
+
+        </div>
 
     </section>
   )
