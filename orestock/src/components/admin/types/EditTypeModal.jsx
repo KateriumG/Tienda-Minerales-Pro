@@ -18,7 +18,7 @@ function EditTypeModal({
         bg-white
         p-6
         rounded-xl
-        w-[420px]
+        w-105
         space-y-4
       ">
 

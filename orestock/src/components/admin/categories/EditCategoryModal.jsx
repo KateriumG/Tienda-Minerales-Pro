@@ -17,7 +17,7 @@ function EditCategoryModal({
         bg-white
         p-6
         rounded-xl
-        w-[400px]
+        w-100
         space-y-4
       ">
 
