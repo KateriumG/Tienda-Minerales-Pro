@@ -39,6 +39,33 @@ function EditProductModal({ form, setForm, types, editing, onSave, onClose }) {
             }
           />
         </div>
+        {/* DESCRIPCIÓN */}
+        <div>
+
+          <label className="
+            text-sm text-gray-600
+          ">
+            Descripción
+          </label>
+
+          <textarea
+            rows={4}
+            className="
+              w-full
+              p-2
+              border
+              rounded
+            "
+            value={form.description || ""}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                description: e.target.value
+              })
+            }
+          />
+
+        </div>
 
         {/* CATEGORÍA */}
         <div>

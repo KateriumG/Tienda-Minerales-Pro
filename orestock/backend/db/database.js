@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS products (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT,
   price INTEGER,
+  description TEXT,
   image TEXT,
   type_id INTEGER,
   FOREIGN KEY (type_id) REFERENCES types(id)

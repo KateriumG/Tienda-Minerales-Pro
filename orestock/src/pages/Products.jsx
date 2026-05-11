@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react"
+import { Link } from "react-router-dom"
 import ProductCard from "../components/ProductCard"
 
 const typesByCategory = {
@@ -128,9 +129,12 @@ function Products() {
             {filteredProducts.length} resultados
           </p>
 
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {filteredProducts.map((p) => (
+              <Link to={`/products/${p.id}`}>
               <ProductCard key={p.id} {...p} />
+              </Link>
             ))}
           </div>
 

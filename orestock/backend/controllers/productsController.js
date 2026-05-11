@@ -12,6 +12,22 @@ exports.getAll = (req, res) => {
   })
 }
 
+exports.getById = (req, res) => {
+  const { id } = req.params
+
+  db.get(`
+    SELECT products.*, types.name AS type_name, categories.name AS category_name
+    FROM products
+    LEFT JOIN types ON products.type_id = types.id
+    LEFT JOIN categories ON types.category_id = categories.id
+    WHERE products.id = ?
+  `, [id], (err, row) => {
+    if (err) return res.status(500).json(err)
+    if (!row) return res.status(404).json({ message: "Product not found" })
+    res.json(row)
+  })
+}
+
 exports.create = (req, res) => {
   const { name, price, image, type_id } = req.body
 
